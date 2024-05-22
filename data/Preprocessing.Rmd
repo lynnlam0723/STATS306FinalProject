@@ -1,0 +1,12 @@
+```{r csv function, message=FALSE, warning=FALSE}
+load_csv <- function(csv_name){
+  path <- paste0(csv_name, "_sample.csv.gz")
+  data <- read_csv(file=path, na = "\\N")
+  rda_path <- paste0(csv_name, ".rda")
+  save(data, file = rda_path)
+}
+  
+files <- list.files(pattern = "_sample\\.csv\\.gz$", full.names = FALSE)
+names <- gsub("_sample\\.csv\\.gz$", "", files)
+lapply(names, load_csv)
+```
